@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:\\\\Users\\\\tcikh\\\\OneDrive\\\\문서\\\\claude\\\\c-suji\\\\web\" && pnpm add @supabase/supabase-js @supabase/ssr xlsx 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\tcikh\\\\OneDrive\\\\문서\\\\claude\\\\c-suji\\\\web\" && pnpm dlx shadcn@latest init --defaults 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\tcikh\\\\OneDrive\\\\문서\\\\claude\\\\c-suji\\\\web\" && pnpm dlx shadcn@latest add card badge input label select toast progress alert 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\tcikh\\\\OneDrive\\\\문서\\\\claude\\\\c-suji\\\\web\" && pnpm dlx shadcn@latest add card badge input label select progress alert 2>&1)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\tcikh\\\\OneDrive\\\\문서\\\\claude\\\\c-suji\\\\web\\\\app\\\\study\\\\checkin\" && mkdir -p \"C:\\\\Users\\\\tcikh\\\\OneDrive\\\\문서\\\\claude\\\\c-suji\\\\web\\\\app\\\\study\\\\practice\" && mkdir -p \"C:\\\\Users\\\\tcikh\\\\OneDrive\\\\문서\\\\claude\\\\c-suji\\\\web\\\\app\\\\study\\\\review\")",
+      "Bash(cd \"C:\\\\Users\\\\tcikh\\\\OneDrive\\\\문서\\\\claude\\\\c-suji\\\\web\" && pnpm lint 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\tcikh\\\\OneDrive\\\\문서\\\\claude\\\\c-suji\\\\web\" && pnpm lint 2>&1 && pnpm type-check 2>&1)",
+      "Bash(cd \"C:/Users/tcikh/OneDrive/문서/claude/c-suji/web\" && pnpm type-check 2>&1)",
+      "Bash(cd \"C:/Users/tcikh/OneDrive/문서/claude/c-suji/web\" && pnpm lint 2>&1)",
+      "Bash(cd \"C:/Users/tcikh/OneDrive/문서/claude/c-suji/web\" && pnpm build 2>&1)",
+      "Bash(vercel --version 2>&1 || echo \"Vercel CLI 미설치\")",
+      "Bash(npm list:*)",
+      "Bash(cd \"C:/Users/tcikh/OneDrive/문서/claude/c-suji/web\" && pnpm build 2>&1 | tail -30)"
+    ]
+  }
+}
