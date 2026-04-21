@@ -1,6 +1,5 @@
 import * as XLSX from 'xlsx'
 import type { Database, ProblemType, AnswerType } from '@/lib/supabase/types'
-import { VALID_COURSE_CODES, VALID_UNIT_CODES } from '@/lib/curriculum'
 
 type ProblemInsert = Database['public']['Tables']['problems']['Insert']
 
@@ -23,7 +22,7 @@ export interface ParseResult {
   errors: string[]
 }
 
-export function parseExcel(buffer: ArrayBuffer): ParseResult {
+export function parseExcel(buffer: ArrayBuffer, courseCode: string, unitCode: string): ParseResult {
   const workbook = XLSX.read(buffer, { type: 'array' })
   const sheet = workbook.Sheets[workbook.SheetNames[0]]
   const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(sheet, {
@@ -42,8 +41,6 @@ export function parseExcel(buffer: ArrayBuffer): ParseResult {
 
     // 필수 필드 검증
     const required = [
-      'course_code',
-      'unit_code',
       'skill_code_main',
       'problem_type',
       'difficulty_level',
@@ -81,25 +78,9 @@ export function parseExcel(buffer: ArrayBuffer): ParseResult {
       return
     }
 
-    const courseCode = r('course_code')
-    if (!VALID_COURSE_CODES.has(courseCode)) {
-      errors.push(
-        `${rowNum}행: course_code 오류 (${courseCode}). 허용값: M1~M3, H1~H3`
-      )
-      return
-    }
-
-    const unitCode = r('unit_code')
-    if (!VALID_UNIT_CODES.has(unitCode)) {
-      errors.push(
-        `${rowNum}행: unit_code 오류 (${unitCode}). 예시: M1U01, M2U03`
-      )
-      return
-    }
-
     problems.push({
-      course_code: r('course_code'),
-      unit_code: r('unit_code'),
+      course_code: courseCode,
+      unit_code: unitCode,
       skill_code_main: r('skill_code_main'),
       problem_type: problemType,
       difficulty_level: difficulty,
