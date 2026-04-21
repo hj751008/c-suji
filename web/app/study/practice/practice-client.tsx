@@ -12,9 +12,11 @@ type Phase = 'question' | 'correct' | 'wrong_feedback' | 'hint1' | 'hint2' | 'so
 export default function PracticeClient({
   problems,
   studentId,
+  unitName,
 }: {
   problems: Problem[]
   studentId: string
+  unitName: string
 }) {
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState('')
@@ -114,7 +116,7 @@ export default function PracticeClient({
           <a href="/study" className="text-gray-400">✕</a>
         </div>
         <Progress value={progress} className="h-2" />
-        <p className="text-xs text-gray-400 mt-2">{problem.unit_code} · 난이도 {'⭐'.repeat(problem.difficulty_level)}</p>
+        <p className="text-xs text-gray-400 mt-2">{unitName} · 난이도 {'⭐'.repeat(problem.difficulty_level)}</p>
       </div>
 
       {/* 문제 영역 */}
