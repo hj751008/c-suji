@@ -1,5 +1,6 @@
 import * as XLSX from 'xlsx'
 import type { Database, ProblemType, AnswerType } from '@/lib/supabase/types'
+import { VALID_COURSE_CODES, VALID_UNIT_CODES } from '@/lib/curriculum'
 
 type ProblemInsert = Database['public']['Tables']['problems']['Insert']
 
@@ -77,6 +78,22 @@ export function parseExcel(buffer: ArrayBuffer): ParseResult {
     const difficulty = Number(r('difficulty_level'))
     if (!Number.isInteger(difficulty) || difficulty < 1 || difficulty > 5) {
       errors.push(`${rowNum}행: difficulty_level은 1~5 사이 정수여야 합니다`)
+      return
+    }
+
+    const courseCode = r('course_code')
+    if (!VALID_COURSE_CODES.has(courseCode)) {
+      errors.push(
+        `${rowNum}행: course_code 오류 (${courseCode}). 허용값: M1~M3, H1~H3`
+      )
+      return
+    }
+
+    const unitCode = r('unit_code')
+    if (!VALID_UNIT_CODES.has(unitCode)) {
+      errors.push(
+        `${rowNum}행: unit_code 오류 (${unitCode}). 예시: M1U01, M2U03`
+      )
       return
     }
 
