@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
+import { CURRICULUM } from '@/lib/curriculum'
 
 export default function UploadForm() {
   const router = useRouter()
@@ -50,6 +51,34 @@ export default function UploadForm() {
           <li>업로드된 문제는 <strong>draft</strong> 상태입니다</li>
           <li>문제 목록에서 <strong>published</strong>로 바꿔야 수지에게 보입니다</li>
         </ol>
+      </div>
+
+      {/* 코드 참조표 */}
+      <div className="bg-white rounded-xl border p-6 mb-6">
+        <h2 className="font-semibold text-gray-700 mb-3">유효한 course_code / unit_code</h2>
+        <div className="space-y-3">
+          {CURRICULUM.map((course) => (
+            <div key={course.code}>
+              <p className="text-xs font-bold text-gray-500 mb-1">
+                {course.code} — {course.name}
+              </p>
+              <div className="flex flex-wrap gap-1">
+                {course.units.map((unit) => (
+                  <span
+                    key={unit.code}
+                    className="text-xs px-2 py-0.5 bg-gray-100 rounded font-mono"
+                    title={unit.name}
+                  >
+                    {unit.code}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="text-xs text-gray-400 mt-3">
+          코드 위에 마우스를 올리면 단원 이름이 표시됩니다.
+        </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
