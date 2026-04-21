@@ -30,15 +30,6 @@ export default async function StudyHome() {
     redirect('/study/checkin')
   }
 
-  // 추천 문제 수 확인
-  const studentId = student?.id ?? (await supabase.from('students').select('id').maybeSingle()).data?.id
-  const { count: recommendedCount } = await supabase
-    .from('problems')
-    .select('id', { count: 'exact', head: true })
-    .eq('status', 'published')
-    .not('id', 'in',
-      `(SELECT problem_id FROM attempts WHERE student_id = '${studentId}' AND is_correct = true)`
-    )
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -51,13 +42,13 @@ export default async function StudyHome() {
       <div className="flex-1 px-5 py-6 space-y-4">
         {/* 문제 풀기 */}
         <Link
-          href="/study/practice"
+          href="/study/select-unit"
           className="block w-full bg-blue-600 text-white rounded-2xl p-6 shadow-sm hover:bg-blue-700 transition-colors"
         >
           <div className="text-2xl mb-2">✏️</div>
           <div className="font-bold text-lg">문제 풀기</div>
           <div className="text-blue-200 text-sm mt-1">
-            {recommendedCount ? `${recommendedCount}문제 남음` : '오늘의 문제'}
+            단원을 선택하고 시작해요
           </div>
         </Link>
 
